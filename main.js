@@ -27,7 +27,6 @@ const servers = {
     ]
 }
 
-
 let constraints = {
     video:{
         width:{min:640, ideal:1920, max:1920},
@@ -51,7 +50,6 @@ let init = async () => {
     localStream = await navigator.mediaDevices.getUserMedia(constraints)
     document.getElementById('user-1').srcObject = localStream
 }
- 
 
 let handleUserLeft = (MemberId) => {
     document.getElementById('user-2').style.display = 'none'
@@ -81,7 +79,6 @@ let handleUserJoined = async (MemberId) => {
     console.log('A new user joined the channel:', MemberId)
     createOffer(MemberId)
 }
-
 
 let createPeerConnection = async (MemberId) => {
     peerConnection = new RTCPeerConnection(servers)
@@ -136,13 +133,11 @@ let createAnswer = async (MemberId, offer) => {
     client.sendMessageToPeer({text:JSON.stringify({'type':'answer', 'answer':answer})}, MemberId)
 }
 
-
 let addAnswer = async (answer) => {
     if(!peerConnection.currentRemoteDescription){
         peerConnection.setRemoteDescription(answer)
     }
 }
-
 
 let leaveChannel = async () => {
     await channel.leave()
@@ -173,7 +168,6 @@ let toggleMic = async () => {
     }
 }
 
-  
 window.addEventListener('beforeunload', leaveChannel)
 
 document.getElementById('camera-btn').addEventListener('click', toggleCamera)
